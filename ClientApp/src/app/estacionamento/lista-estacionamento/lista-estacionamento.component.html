@@ -1,0 +1,34 @@
+<h1 id="tableLabel">Estacionamento</h1>
+
+<p *ngIf="!estacionamento"><em>Loading...</em></p>
+
+<div class="float-right mb-4">
+  <button class="btn btn-success" [routerLink]="['/entrada']">Marcar Entrada</button>
+</div>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="estacionamento">
+  <thead>
+    <tr>
+      <th>Placa</th>
+      <th>Horário de Chegada</th>
+      <th>Horário de Saída</th>
+      <th>Duração</th>
+      <th>Tempo Cobrado(hora)</th>
+      <th>Preço</th>
+      <th>Valor a Pagar</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of estacionamento">
+      <td>{{ item.placa }}</td>
+      <td>{{ item.horarioChegada }}</td>
+      <td>{{ item.horarioSaida }}</td>
+      <td>{{ item.duracao }}</td>
+      <td>{{ item.tempoCobrado }}</td>
+      <td>R$ {{ item.preco | number: '1.2-2' }}</td>
+      <td>R$ {{ item.valorAPagar | number: '1.2-2' }}</td>
+      <td *ngIf="!item.horarioSaida"><button class="btn btn-danger ml-1" [routerLink]="['/saida', item.id]">Marcar Saída</button></td>
+    </tr>
+  </tbody>
+</table>

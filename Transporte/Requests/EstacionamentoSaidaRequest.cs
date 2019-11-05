@@ -7,7 +7,7 @@ namespace ControleDeEstacionamento.Transporte.Requests
 {
     public class EstacionamentoSaidaRequest
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string HorarioSaida { get; set; }
     }
 }

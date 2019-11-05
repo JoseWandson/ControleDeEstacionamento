@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using ControleDeEstacionamento.Dominio.Entidades;
@@ -45,16 +44,19 @@ namespace ControleDeEstacionamento.Servico.Servicos
             if (DateTime.TryParse(viewModel.HorarioSaida, out DateTime saida))
             {
                 Estacionamento estacionamento = Contexto.Estacionamento.FirstOrDefault(e => e.Id == viewModel.Id);
+                viewModel.Placa = estacionamento.Placa;
+                viewModel.HorarioChegada = estacionamento.HorarioChegada.ConverterDataCompletaParaTexto();
                 Preco preco = Contexto.Precos.FirstOrDefault(p => DateTime.Now >= p.DataInicio && DateTime.Now <= p.DataFim);
-                viewModel.Preco = preco.Valor > 0 ? preco.Valor : 2;
+                viewModel.Preco = preco != null && preco.Valor > 0 ? preco.Valor : 2;
 
                 double tolerancia = Convert.ToDouble(Config.GetSection("AppConfiguration")["TempoDeTolerancia"], CultureInfo.CurrentCulture);
                 TimeSpan timeSpan = saida.Subtract(estacionamento.HorarioChegada);
-                viewModel.Duracao = $"{timeSpan.TotalHours}:{timeSpan.Minutes}:{timeSpan.Seconds}";
+                viewModel.Duracao = $"{(int)timeSpan.TotalHours}:{timeSpan.Minutes}:{timeSpan.Seconds}";
                 double duracao = timeSpan.TotalHours;
                 double duracaoComTolerancia = duracao > 1 ? duracao - tolerancia : duracao;
 
                 int y = (int)duracaoComTolerancia;
+                viewModel.TempoCobrado = 1;
                 if (0 < duracaoComTolerancia - y && duracaoComTolerancia - y <= 0.5)
                 {
                     viewModel.TempoCobrado = y + 0.5;

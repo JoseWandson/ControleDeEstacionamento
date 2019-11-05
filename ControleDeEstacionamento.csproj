@@ -37,6 +37,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\estacionamento\entrada-estacionamento\entrada-estacionamento.component.css" />
+    <None Remove="ClientApp\src\app\estacionamento\entrada-estacionamento\entrada-estacionamento.component.spec.ts" />
+    <None Remove="ClientApp\src\app\estacionamento\lista-estacionamento\lista-estacionamento.component.css" />
+    <None Remove="ClientApp\src\app\estacionamento\saida-estacionamento\saida-estacionamento.component.css" />
+    <None Remove="ClientApp\src\app\estacionamento\saida-estacionamento\saida-estacionamento.component.spec.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Dominio\Mensagens\Mensagem.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

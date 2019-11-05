@@ -27,7 +27,7 @@ namespace ControleDeEstacionamento.Infraestrutura.Extensions
 
         public static string ConverterDataCompletaParaTexto(this DateTime data)
         {
-            return data != null ? data.ToString("dd/mm/aaaa HH:mm:ss", CultureInfo.InvariantCulture) : string.Empty;
+            return data != null ? data.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture) : string.Empty;
         }
 
         public static string ConverterHoraParaTexto(this DateTime data)

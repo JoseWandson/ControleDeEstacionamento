@@ -41,14 +41,14 @@ namespace ControleDeEstacionamento.Controllers
         }
 
         // POST estacionamento/Entrada
-        [HttpPost]
+        [HttpPost("entrada")]
         public IActionResult Entrada([FromBody]EstacionamentoEntradaRequest viewModel)
         {
             return Ok(new ValorResponse<long>(_estacionamentoServico.Entrada(viewModel)));
         }
 
         // POST estacionamento/Saida
-        [HttpPost]
+        [HttpPost("saida")]
         public IActionResult Saida([FromBody]EstacionamentoSaidaRequest viewModel)
         {
             return Ok(new ValorResponse<long>(_estacionamentoServico.Saida(viewModel)));

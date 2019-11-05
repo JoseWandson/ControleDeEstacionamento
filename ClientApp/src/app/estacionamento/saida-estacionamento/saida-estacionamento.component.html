@@ -1,0 +1,10 @@
+<h1>Marcar Saída</h1>
+
+<form (ngSubmit)="marcarSaida(frm)" #frm="ngForm">
+  <div class="form-group">
+    <label>Horário de Saída</label>
+    <input type="time" class="form-control" [(ngModel)]="saida.horarioSaida" name="horarioSaida" required />
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="frm.invalid">Salvar</button>
+</form>

@@ -13,12 +13,7 @@ namespace ControleDeEstacionamento.Persistencia
 
         public Context(DbContextOptions<Context> options) : base(options)
         {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(
-                @"Server=AVELL;Database=Estacionamento;Integrated Security=True");
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,13 +29,13 @@ namespace ControleDeEstacionamento.Persistencia
 
         public T Incluir<T>(T entidade) where T : Entidade
         {
-            this.Set<T>().Add(entidade);
+            Set<T>().Add(entidade);
             return entidade;
         }
 
         public T Alterar<T>(T entidade) where T : Entidade
         {
-            this.Entry<T>(entidade).State = EntityState.Modified;
+            Entry(entidade).State = EntityState.Modified;
             return entidade;
         }
 
@@ -58,7 +53,7 @@ namespace ControleDeEstacionamento.Persistencia
 
         public T Excluir<T>(T entidade) where T : Entidade
         {
-            this.Set<T>().Remove(entidade);
+            Set<T>().Remove(entidade);
             return entidade;
         }
     }

@@ -1,0 +1,15 @@
+<h1>Marcar Entrada</h1>
+
+<form (ngSubmit)="marcarEntrada(frm)" #frm="ngForm">
+  <div class="form-group">
+    <label>Placa</label>
+    <input type="text" class="form-control" [(ngModel)]="entrada.placa" name="placa" required />
+  </div>
+
+  <div class="form-group">
+    <label>Horário de Chegada</label>
+    <input type="time" class="form-control" [(ngModel)]="entrada.horarioChegada" name="horarioChegada" required />
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="frm.invalid">Salvar</button>
+</form>

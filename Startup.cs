@@ -1,8 +1,10 @@
 using ControleDeEstacionamento.Dominio.Interfaces.Servicos;
+using ControleDeEstacionamento.Persistencia;
 using ControleDeEstacionamento.Servico.Servicos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +23,8 @@ namespace ControleDeEstacionamento
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<Context>(options => options.UseSqlServer(@"Server=AVELL;Database=Estacionamento;Integrated Security=True"));
+
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -28,7 +32,7 @@ namespace ControleDeEstacionamento
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddTransient<IPrecoServico, PrecoServico>();
+            /*services.AddTransient<IPrecoServico, PrecoServico>();*/
             services.AddTransient<IEstacionamentoServico, EstacionamentoServico>();
         }
 
